@@ -705,46 +705,157 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
+        /* ========================================
+           RESPONSIVE DESIGN - MOBILE FIRST
+           ======================================== */
 
-            .hud-header {
-                padding: 15px 20px;
-            }
-
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .hero-subtitle {
-                font-size: 20px;
-            }
-
-            .cta-container {
-                flex-direction: column;
-            }
-
-            .cta-btn {
-                width: 100%;
+        /* MOBILE - Base styles (< 768px) */
+        @media (max-width: 767px) {
+            /* Grid and patterns */
+            .cyber-grid {
+                background-size: 30px 30px;
             }
 
             .hex-pattern {
                 display: none;
             }
 
+            .jp-text {
+                font-size: 60px;
+                opacity: 0.03;
+            }
+
+            .jp-text.jp-1 {
+                top: 10%;
+                left: -20px;
+            }
+
+            .jp-text.jp-2 {
+                bottom: 10%;
+                right: -10px;
+            }
+
+            /* HUD Header */
+            .hud-header {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            .hud-status {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            /* Decorative corners */
+            .deco-corner {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* Main container */
+            .container {
+                padding: 20px;
+                min-height: auto;
+                padding-top: 100px;
+            }
+
+            /* Hero section */
+            .status-badge {
+                font-size: 11px;
+                padding: 6px 15px;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+                margin-bottom: 15px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+                letter-spacing: 2px;
+                margin-bottom: 25px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 35px;
+            }
+
+            /* CTA Buttons */
+            .cta-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                padding: 16px 30px;
+                font-size: 14px;
+                letter-spacing: 1.5px;
+            }
+
+            /* Projects Section */
             .projects-section {
                 padding: 20px;
                 margin-top: 60px;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .section-title {
+                font-size: 24px;
+                letter-spacing: 2px;
+                margin-bottom: 30px;
             }
 
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .project-card {
+                clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .project-tag {
+                font-size: 10px;
+                padding: 5px 12px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: 20px;
+                letter-spacing: 1px;
+                margin-bottom: 8px;
+            }
+
+            .project-description {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .tech-badge {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+
+            .project-link {
+                font-size: 12px;
+            }
+
+            /* Contact Section */
             .contact-section {
                 padding: 20px;
                 margin-top: 60px;
@@ -752,19 +863,276 @@
 
             .terminal {
                 padding: 20px;
+                clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+            }
+
+            .terminal::before {
+                font-size: 10px;
+                margin-bottom: 15px;
+                padding-bottom: 12px;
             }
 
             .terminal-line {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 15px;
             }
 
             .terminal-prompt {
+                font-size: 14px;
                 min-width: auto;
             }
 
-            .terminal-input {
+            .terminal-input,
+            .terminal-textarea {
                 width: 100%;
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+
+            .terminal-textarea {
+                min-height: 120px;
+            }
+
+            .terminal-submit {
+                padding: 16px;
+                font-size: 14px;
+                letter-spacing: 2px;
+                margin-top: 20px;
+            }
+
+            .terminal-footer {
+                font-size: 9px;
+                margin-top: 15px;
+            }
+        }
+
+        /* TABLET - Medium screens (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            /* Grid and patterns */
+            .cyber-grid {
+                background-size: 40px 40px;
+            }
+
+            .hex-pattern {
+                width: 300px;
+                height: 300px;
+                right: -80px;
+            }
+
+            .jp-text {
+                font-size: 90px;
+            }
+
+            .jp-text.jp-1 {
+                top: 15%;
+                left: -40px;
+            }
+
+            .jp-text.jp-2 {
+                bottom: 12%;
+                right: -20px;
+            }
+
+            /* HUD Header */
+            .hud-header {
+                padding: 18px 30px;
+            }
+
+            .hud-status {
+                font-size: 11px;
+            }
+
+            /* Decorative corners */
+            .deco-corner {
+                width: 150px;
+                height: 150px;
+            }
+
+            /* Main container */
+            .container {
+                padding: 30px;
+            }
+
+            /* Hero section */
+            .status-badge {
+                font-size: 12px;
+                padding: 7px 18px;
+            }
+
+            .hero-title {
+                font-size: 80px;
+            }
+
+            .hero-subtitle {
+                font-size: 32px;
+                letter-spacing: 3px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+                max-width: 650px;
+            }
+
+            /* CTA Buttons */
+            .cta-container {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .cta-btn {
+                flex: 1;
+                min-width: 200px;
+                padding: 17px 35px;
+                font-size: 15px;
+            }
+
+            /* Projects Section */
+            .projects-section {
+                padding: 30px;
+                margin-top: 80px;
+            }
+
+            .section-title {
+                font-size: 32px;
+                letter-spacing: 3px;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .project-card {
+                clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+            }
+
+            .project-image {
+                height: 220px;
+            }
+
+            .project-tag {
+                font-size: 11px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .project-content {
+                padding: 22px;
+            }
+
+            .project-title {
+                font-size: 22px;
+            }
+
+            .project-description {
+                font-size: 15px;
+            }
+
+            /* Contact Section */
+            .contact-section {
+                padding: 30px;
+                margin-top: 80px;
+            }
+
+            .terminal {
+                padding: 25px;
+            }
+
+            .terminal-line {
+                gap: 12px;
+            }
+
+            .terminal-prompt {
+                font-size: 15px;
+                min-width: 100px;
+            }
+
+            .terminal-input,
+            .terminal-textarea {
+                font-size: 15px;
+                padding: 14px 18px;
+            }
+
+            .terminal-textarea {
+                min-height: 140px;
+            }
+
+            .terminal-submit {
+                padding: 18px;
+                font-size: 16px;
+                margin-top: 25px;
+            }
+
+            .terminal-footer {
+                font-size: 10px;
+            }
+        }
+
+        /* DESKTOP - Large screens (> 1024px) */
+        @media (min-width: 1025px) {
+            /* Everything uses the base styles defined above */
+            /* These are just fine-tuning adjustments for very large screens */
+            
+            .hero-title {
+                font-size: clamp(80px, 8vw, 120px);
+            }
+
+            .hero-subtitle {
+                font-size: clamp(32px, 3vw, 48px);
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            /* Ensure max-width on very large screens */
+            .hero,
+            .projects-section,
+            .contact-section {
+                max-width: 1400px;
+            }
+        }
+
+        /* LANDSCAPE MOBILE FIX */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .container {
+                padding-top: 80px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+        }
+
+        /* HIGH DPI SCREENS (Retina) */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .cyber-grid {
+                background-size: 50px 50px;
+            }
+        }
+
+        /* ACCESSIBILITY - Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .scan-line,
+            .cyber-grid,
+            .hex-pattern {
+                animation: none !important;
             }
         }
     </style>
