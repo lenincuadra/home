@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LenK // PORTFOLIO_v2.077</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyber-yellow: #FFD900;
+            --cyber-cyan: #00F0FF;
+            --cyber-pink: #FF2A6D;
+            --cyber-purple: #7B2CBF;
+            --dark-bg: #0A0E27;
+            --darker-bg: #050816;
+            --grid-color: rgba(0, 240, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker-bg);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Grid Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 3s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--cyber-cyan);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--cyber-pink);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(61px, 9999px, 78px, 0); }
+            20% { clip: rect(2px, 9999px, 121px, 0); }
+            40% { clip: rect(55px, 9999px, 23px, 0); }
+            60% { clip: rect(89px, 9999px, 44px, 0); }
+            80% { clip: rect(12px, 9999px, 93px, 0); }
+            100% { clip: rect(70px, 9999px, 15px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(2deg); }
+            20% { transform: skew(0deg); }
+            30% { transform: skew(-1deg); }
+            40% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        /* HUD Header */
+        .hud-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, transparent 100%);
+            z-index: 100;
+            border-bottom: 1px solid var(--cyber-cyan);
+        }
+
+        .hud-status {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            color: var(--cyber-cyan);
+            letter-spacing: 2px;
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyber-cyan), transparent);
+            animation: scan 4s linear infinite;
+            z-index: 99;
+            opacity: 0.5;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 217, 0, 0.1);
+            border: 2px solid var(--cyber-yellow);
+            color: var(--cyber-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(60px, 10vw, 120px);
+            font-weight: 900;
+            color: var(--cyber-yellow);
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 10px var(--cyber-yellow),
+                0 0 20px var(--cyber-yellow),
+                0 0 40px rgba(255, 217, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(24px, 4vw, 48px);
+            font-weight: 600;
+            color: var(--cyber-cyan);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-description {
+            font-size: 20px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        /* CTA Buttons */
+        .cta-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .cta-btn {
+            padding: 18px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: var(--cyber-yellow);
+            color: var(--darker-bg);
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 217, 0, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--cyber-cyan);
+            border: 2px solid var(--cyber-cyan);
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Decorative Elements */
+        .deco-corner {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border: 2px solid var(--cyber-cyan);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .deco-corner.top-left {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .deco-corner.bottom-right {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Hexagonal Pattern */
+        .hex-pattern {
+            position: fixed;
+            top: 50%;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 30px, var(--cyber-purple) 30px, var(--cyber-purple) 32px),
+                repeating-linear-gradient(60deg, transparent, transparent 30px, var(--cyber-purple) 30px, var(--cyber-purple) 32px),
+                repeating-linear-gradient(-60deg, transparent, transparent 30px, var(--cyber-purple) 30px, var(--cyber-purple) 32px);
+            opacity: 0.1;
+            transform: translateY(-50%) rotate(15deg);
+            animation: hexRotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes hexRotate {
+            from { transform: translateY(-50%) rotate(15deg); }
+            to { transform: translateY(-50%) rotate(375deg); }
+        }
+
+        /* Japanese Text Decoration */
+        .jp-text {
+            position: fixed;
+            font-size: 120px;
+            color: rgba(255, 42, 109, 0.05);
+            font-weight: 900;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .jp-text.jp-1 {
+            top: 20%;
+            left: -50px;
+            transform: rotate(-15deg);
+        }
+
+        .jp-text.jp-2 {
+            bottom: 15%;
+            right: -30px;
+            transform: rotate(10deg);
+        }
+
+        /* Noise Texture Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .hud-header {
+                padding: 15px 20px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .cta-container {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+
+            .hex-pattern {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- Animated Grid -->
+    <div class="cyber-grid"></div>
+
+    <!-- Scan Line -->
+    <div class="scan-line"></div>
+
+    <!-- HUD Header -->
+    <div class="hud-header">
+        <div class="hud-status">SYSTEM_ONLINE // v2.077</div>
+        <div class="hud-status">STATUS: <span style="color: var(--cyber-yellow);">SEEKING_OPPORTUNITIES</span></div>
+    </div>
+
+    <!-- Decorative Corners -->
+    <div class="deco-corner top-left"></div>
+    <div class="deco-corner bottom-right"></div>
+
+    <!-- Hexagonal Pattern -->
+    <div class="hex-pattern"></div>
+
+    <!-- Japanese Text -->
+    <div class="jp-text jp-1">デザイン</div>
+    <div class="jp-text jp-2">コード</div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="hero">
+            <div class="status-badge">AVAILABLE FOR HIRE</div>
+            
+            <h1 class="hero-title glitch" data-text="LENK">LENK</h1>
+            
+            <h2 class="hero-subtitle">DESIGNER VIBE CODER</h2>
+            
+            <p class="hero-description">
+                Fusionando creatividad visual con código técnico. Construyendo experiencias digitales 
+                que no solo funcionan, sino que conectan. Porque perdí mi trabajo, pero no perdí mi 
+                hambre de crear algo extraordinario.
+            </p>
+
+            <div class="cta-container">
+                <button class="cta-btn cta-primary" onclick="alert('¡Próximamente! Aquí irá tu formulario de contacto o email.')">
+                    INICIAR CONTACTO
+                </button>
+                <button class="cta-btn cta-secondary" onclick="alert('¡Próximamente! Aquí irán tus proyectos.')">
+                    VER PROYECTOS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add subtle parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const hexPattern = document.querySelector('.hex-pattern');
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            if (hexPattern) {
+                hexPattern.style.transform = `translateY(-50%) rotate(15deg) translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+
+        // Random glitch effect trigger
+        setInterval(() => {
+            const glitchElement = document.querySelector('.glitch');
+            glitchElement.style.animation = 'none';
+            setTimeout(() => {
+                glitchElement.style.animation = 'glitch-skew 3s infinite';
+            }, 10);
+        }, 5000);
+    </script>
+</body>
+</html>
